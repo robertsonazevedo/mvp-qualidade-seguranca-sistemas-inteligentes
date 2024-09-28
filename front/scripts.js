@@ -11,14 +11,20 @@ const getList = async () => {
     .then((response) => response.json())
     .then((data) => {
       data.pacientes.forEach(item => insertList(item.name, 
-                                                item.preg, 
-                                                item.plas,
-                                                item.pres,
-                                                item.skin,
-                                                item.test,
-                                                item.mass,
-                                                item.pedi,
-                                                item.age,
+                                                item.a1_score, 
+                                                item.a2_score,
+                                                item.a3_score,
+                                                item.a4_score,
+                                                item.a5_score,
+                                                item.a6_score,
+                                                item.a7_score,
+                                                item.a8_score,
+                                                item.a9_score,
+                                                item.a10_score,
+                                                item.gender_cod,
+                                                item.jaundice_cod,
+                                                item.autism_cod,
+                                                item.relation_cod,
                                                 item.outcome
                                               ))
     })
@@ -42,20 +48,28 @@ getList()
   Função para colocar um item na lista do servidor via requisição POST
   --------------------------------------------------------------------------------------
 */
-const postItem = async (inputPatient, inputPreg, inputPlas,
-                        inputPres, inputSkin, inputTest, 
-                        inputMass, inputPedi, inputAge) => {
+const postItem = async (inputPatient, inputA1_score, inputA2_score,
+                        inputA3_score, inputA4_score, inputA5_score, 
+                        inputA6_score, inputA7_score, inputA8_score,
+                        inputA9_score, inputA10_score, inputGender_cod,
+                        inputJaundice_cod, inputAutism_cod, inputRelation_cod) => {
     
   const formData = new FormData();
   formData.append('name', inputPatient);
-  formData.append('preg', inputPreg);
-  formData.append('plas', inputPlas);
-  formData.append('pres', inputPres);
-  formData.append('skin', inputSkin);
-  formData.append('test', inputTest);
-  formData.append('mass', inputMass);
-  formData.append('pedi', inputPedi);
-  formData.append('age', inputAge);
+  formData.append('a1_score', inputA1_score);
+  formData.append('a2_score', inputA2_score);
+  formData.append('a3_score', inputA3_score);
+  formData.append('a4_score', inputA4_score);
+  formData.append('a5_score', inputA5_score);
+  formData.append('a6_score', inputA6_score);
+  formData.append('a7_score', inputA7_score);
+  formData.append('a8_score', inputA8_score);
+  formData.append('a9_score', inputA9_score);
+  formData.append('a10_score', inputA10_score);
+  formData.append('gender_cod', inputGender_cod);
+  formData.append('jaundice_cod', inputJaundice_cod);
+  formData.append('autism_cod', inputAutism_cod);
+  formData.append('relation_cod', inputRelation_cod);
 
   let url = 'http://127.0.0.1:5000/paciente';
   fetch(url, {
@@ -128,14 +142,20 @@ const deleteItem = (item) => {
 */
 const newItem = async () => {
   let inputPatient = document.getElementById("newInput").value;
-  let inputPreg = document.getElementById("newPreg").value;
-  let inputPlas = document.getElementById("newPlas").value;
-  let inputPres = document.getElementById("newPres").value;
-  let inputSkin = document.getElementById("newSkin").value;
-  let inputTest = document.getElementById("newTest").value;
-  let inputMass = document.getElementById("newMass").value;
-  let inputPedi = document.getElementById("newPedi").value;
-  let inputAge = document.getElementById("newAge").value;
+  let inputA1_score = document.getElementById("newA1_score").value;
+  let inputA2_score = document.getElementById("newA2_score").value;
+  let inputA3_score = document.getElementById("newA3_score").value;
+  let inputA4_score = document.getElementById("newA4_score").value;
+  let inputA5_score = document.getElementById("newA5_score").value;
+  let inputA6_score = document.getElementById("newA6_score").value;
+  let inputA7_score = document.getElementById("newA7_score").value;
+  let inputA8_score = document.getElementById("newA8_score").value;
+  let inputA9_score = document.getElementById("newA9_score").value;
+  let inputA10_score = document.getElementById("newA10_score").value;
+  let inputGender_cod = document.getElementById("newGender_cod").value;
+  let inputJaundice_cod = document.getElementById("newJaundice_cod").value;
+  let inputAutism_cod = document.getElementById("newAutism_cod").value;
+  let inputRelation_cod = document.getElementById("newRelation_cod").value;
 
   // Verifique se o nome do produto já existe antes de adicionar
   const checkUrl = `http://127.0.0.1:5000/pacientes?nome=${inputPatient}`;
@@ -146,14 +166,14 @@ const newItem = async () => {
     .then((data) => {
       if (data.pacientes && data.pacientes.some(item => item.name === inputPatient)) {
         alert("O paciente já está cadastrado.\nCadastre o paciente com um nome diferente ou atualize o existente.");
-      } else if (inputPatient === '') {
-        alert("O nome do paciente não pode ser vazio!");
-      } else if (isNaN(inputPreg) || isNaN(inputPlas) || isNaN(inputPres) || isNaN(inputSkin) || isNaN(inputTest) || isNaN(inputMass) || isNaN(inputPedi) || isNaN(inputAge)) {
+      } else if (inputPatient === '' || inputA1_score === '' || inputA2_score === '' || inputA3_score === '' || inputA4_score === '' || inputA5_score === '' || inputA6_score === '' || inputA7_score === '' || inputA8_score === '' || inputA9_score === '' || inputA10_score === '' || inputGender_cod === '' || inputJaundice_cod === '' || inputAutism_cod === '' || inputRelation_cod === '') {
+        alert("Existem campos vazios. Verifique se preencheu NOME e todos os dados nas caixas de seleções.");
+      } else if (isNaN(inputA1_score) || isNaN(inputA2_score) || isNaN(inputA3_score) || isNaN(inputA4_score) || isNaN(inputA5_score) || isNaN(inputA6_score) || isNaN(inputA7_score) || isNaN(inputA8_score) || isNaN(inputA9_score) || isNaN(inputA10_score) || isNaN(inputGender_cod) || isNaN(inputJaundice_cod) || isNaN(inputAutism_cod) || isNaN(inputRelation_cod)) {
         alert("Esse(s) campo(s) precisam ser números!");
       } else {
-        insertList(inputPatient, inputPreg, inputPlas, inputPres, inputSkin, inputTest, inputMass, inputPedi, inputAge);
-        postItem(inputPatient, inputPreg, inputPlas, inputPres, inputSkin, inputTest, inputMass, inputPedi, inputAge);
-        alert("Item adicionado!");
+        insertList(inputPatient, inputA1_score, inputA2_score, inputA3_score, inputA4_score, inputA5_score, inputA6_score, inputA7_score, inputA8_score, inputA9_score, inputA10_score, inputGender_cod, inputJaundice_cod, inputAutism_cod, inputRelation_cod);
+        postItem(inputPatient, inputA1_score, inputA2_score, inputA3_score, inputA4_score, inputA5_score, inputA6_score, inputA7_score, inputA8_score, inputA9_score, inputA10_score, inputGender_cod, inputJaundice_cod, inputAutism_cod, inputRelation_cod);
+        alert("Paciente adicionado!");
       }
     })
     .catch((error) => {
@@ -167,8 +187,8 @@ const newItem = async () => {
   Função para inserir items na lista apresentada
   --------------------------------------------------------------------------------------
 */
-const insertList = (namePatient, preg, plas,pres, skin, test, mass, pedi, age, outcome) => {
-  var item = [namePatient, preg, plas,pres, skin, test, mass, pedi, age, outcome];
+const insertList = (namePatient, a1_score, a2_score, a3_score, a4_score, a5_score, a6_score, a7_score, a8_score, a9_score, a10_score, gender_cod, jaundice_cod, autism_cod, relation_cod, outcome) => {
+  var item = [namePatient, a1_score, a2_score, a3_score, a4_score, a5_score, a6_score, a7_score, a8_score, a9_score, a10_score, gender_cod, jaundice_cod, autism_cod, relation_cod, outcome];
   var table = document.getElementById('myTable');
   var row = table.insertRow();
 
@@ -182,14 +202,20 @@ const insertList = (namePatient, preg, plas,pres, skin, test, mass, pedi, age, o
 
 
   document.getElementById("newInput").value = "";
-  document.getElementById("newPreg").value = "";
-  document.getElementById("newPlas").value = "";
-  document.getElementById("newPres").value = "";
-  document.getElementById("newSkin").value = "";
-  document.getElementById("newTest").value = "";
-  document.getElementById("newMass").value = "";
-  document.getElementById("newPedi").value = "";
-  document.getElementById("newAge").value = "";
+  document.getElementById("newA1_score").value = "";
+  document.getElementById("newA2_score").value = "";
+  document.getElementById("newA3_score").value = "";
+  document.getElementById("newA4_score").value = "";
+  document.getElementById("newA5_score").value = "";
+  document.getElementById("newA6_score").value = "";
+  document.getElementById("newA7_score").value = "";
+  document.getElementById("newA8_score").value = "";
+  document.getElementById("newA9_score").value = "";
+  document.getElementById("newA10_score").value = "";
+  document.getElementById("newGender_cod").value = "";
+  document.getElementById("newJaundice_cod").value = "";
+  document.getElementById("newAutism_cod").value = "";
+  document.getElementById("newRelation_cod").value = "";
 
   removeElement();
 }

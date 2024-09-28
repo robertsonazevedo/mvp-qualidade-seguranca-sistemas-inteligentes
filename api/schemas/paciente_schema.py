@@ -8,28 +8,40 @@ class PacienteSchema(BaseModel):
     """ Define como um novo paciente a ser inserido deve ser representado
     """
     name: str = "Maria"
-    preg: int = 6
-    plas: int = 148
-    pres: int = 72
-    skin: int = 35
-    test: int = 2
-    mass: float = 33.6
-    pedi: float = 0.627
-    age: int = 50
+    a1_score: int = 0
+    a2_score: int = 0
+    a3_score: int = 0
+    a4_score: int = 0
+    a5_score: int = 0
+    a6_score: int = 0
+    a7_score: int = 0
+    a8_score: int = 0
+    a9_score: int = 0
+    a10_score: int = 0
+    gender_cod: int = 0
+    jaundice_cod: int = 0
+    autism_cod: int = 0
+    relation_cod: int = 0 
     
 class PacienteViewSchema(BaseModel):
     """Define como um paciente será retornado
     """
     id: int = 1
     name: str = "Maria"
-    preg: int = 6
-    plas: int = 148
-    pres: int = 72
-    skin: int = 35
-    test: int = 0
-    mass: float = 33.6
-    pedi: float = 0.627
-    age: int = 50
+    a1_score: int = 0
+    a2_score: int = 0
+    a3_score: int = 0
+    a4_score: int = 0
+    a5_score: int = 0
+    a6_score: int = 0
+    a7_score: int = 0
+    a8_score: int = 0
+    a9_score: int = 0
+    a10_score: int = 0
+    gender_cod: int = 0
+    jaundice_cod: int = 0
+    autism_cod: int = 0
+    relation_cod: int = 0 
     outcome: int = None
     
 class PacienteBuscaSchema(BaseModel):
@@ -57,14 +69,20 @@ def apresenta_paciente(paciente: Paciente):
     return {
         "id": paciente.id,
         "name": paciente.name,
-        "preg": paciente.preg,
-        "plas": paciente.plas,
-        "pres": paciente.pres,
-        "skin": paciente.skin,
-        "test": paciente.test,
-        "mass": paciente.mass,
-        "pedi": paciente.pedi,
-        "age": paciente.age,
+        "a1_score": paciente.a1_score,
+        "a2_score": paciente.a2_score,
+        "a3_score": paciente.a3_score,
+        "a4_score": paciente.a4_score,
+        "a5_score": paciente.a5_score,
+        "a6_score": paciente.a6_score,
+        "a7_score": paciente.a7_score,
+        "a8_score": paciente.a8_score,
+        "a9_score": paciente.a9_score,
+        "a10_score": paciente.a10_score,
+        "gender_cod": paciente.gender_cod,
+        "jaundice_cod": paciente.jaundice_cod,
+        "autism_cod": paciente.autism_cod,
+        "relation_cod": paciente.relation_cod,
         "outcome": paciente.outcome
     }
     
@@ -78,14 +96,20 @@ def apresenta_pacientes(pacientes: List[Paciente]):
         result.append({
             "id": paciente.id,
             "name": paciente.name,
-            "preg": paciente.preg,
-            "plas": paciente.plas,
-            "pres": paciente.pres,    
-            "skin": paciente.skin,
-            "test": paciente.test,
-            "mass": paciente.mass,
-            "pedi": paciente.pedi,
-            "age": paciente.age,
+            "a1_score": paciente.a1_score,
+            "a2_score": paciente.a2_score,
+            "a3_score": paciente.a3_score,
+            "a4_score": paciente.a4_score,
+            "a5_score": paciente.a5_score,
+            "a6_score": paciente.a6_score,
+            "a7_score": paciente.a7_score,
+            "a8_score": paciente.a8_score,
+            "a9_score": paciente.a9_score,
+            "a10_score": paciente.a10_score,
+            "gender_cod": paciente.gender_cod,
+            "jaundice_cod": paciente.jaundice_cod,
+            "autism_cod": paciente.autism_cod,
+            "relation_cod": paciente.relation_cod,
             "outcome": paciente.outcome
         })
 

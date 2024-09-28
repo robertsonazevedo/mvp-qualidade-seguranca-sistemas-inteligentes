@@ -17,7 +17,7 @@ CORS(app)
 
 # Definindo tags para agrupamento das rotas
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
-paciente_tag = Tag(name="Paciente", description="Adição, visualização, remoção e predição de pacientes com Diabetes")
+paciente_tag = Tag(name="Paciente", description="Adição, visualização, remoção e predição de pacientes com TEA")
 
 
 # Rota home
@@ -49,7 +49,7 @@ def get_pacientes():
         # Se não houver pacientes
         return {"pacientes": []}, 200
     else:
-        logger.debug(f"%d pacientes econtrados" % len(pacientes))
+        logger.debug(f"%d pacientes encontrados" % len(pacientes))
         print(pacientes)
         return apresenta_pacientes(pacientes), 200
 
@@ -62,15 +62,22 @@ def predict(form: PacienteSchema):
     Retorna uma representação dos pacientes e diagnósticos associados.
     
     Args:
-        name (str): nome do paciente
-        preg (int): número de vezes que engravidou: Pregnancies
-        plas (int): concentração de glicose no plasma: Glucose
-        pres (int): pressão diastólica (mm Hg): BloodPressure
-        skin (int): espessura da dobra cutânea do tríceps (mm): SkinThickness
-        test (int): insulina sérica de 2 horas (mu U/ml): Insulin
-        mass (float): índice de massa corporal (peso em kg/(altura em m)^2): BMI
-        pedi (float): função pedigree de diabetes: DiabetesPedigreeFunction
-        age (int): idade (anos): Age
+        name: nome do paciente
+        a1_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a2_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        A3_Score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a4_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a5_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a6_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        A7_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a8_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a9_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        a10_score: 0 - Para pontos até 32. 1 - Para pontos de 33 em diante, máximo 50.
+        gender_cod: Genero (0 - Masculino | 1 - Feminino)
+        jaundice_cod: Se teve Icterícia ao nascer (0 - Não | 1 - Sim)
+        autism_cod: Se tem pais com diagnóstico de autismo (0 - Não | 1 - Sim)
+        relation_cod: quem preencheu o formulário (0 - Próprio | 1 - Pais | 2 - Parentes | 3 - Cuidador | 4 - Outros)
+        outcome: diagnóstico (0 - Tea não confirmado | 1 - Tea Confirmado)
         
     Returns:
         dict: representação do paciente e diagnóstico associado
@@ -79,19 +86,25 @@ def predict(form: PacienteSchema):
 
     # Recuperando os dados do formulário
     name = form.name
-    preg = form.preg
-    plas = form.plas
-    pres = form.pres
-    skin = form.skin
-    test = form.test
-    mass = form.mass
-    pedi = form.pedi
-    age = form.age
+    a1_score = form.a1_score
+    a2_score = form.a2_score
+    a3_score = form.a3_score
+    a4_score = form.a4_score
+    a5_score = form.a5_score
+    a6_score = form.a6_score
+    a7_score = form.a7_score
+    a8_score = form.a8_score
+    a9_score = form.a9_score
+    a10_score = form.a10_score
+    gender_cod = form.gender_cod
+    jaundice_cod = form.jaundice_cod
+    autism_cod = form.autism_cod
+    relation_cod = form.relation_cod
         
     # Preparando os dados para o modelo
     X_input = PreProcessador.preparar_form(form)
     # Carregando modelo
-    model_path = './MachineLearning/pipelines/rf_diabetes_pipeline.pkl'
+    model_path = './MachineLearning/pipelines/rf_tea_pipeline.pkl'
     # modelo = Model.carrega_modelo(ml_path)
     modelo = Pipeline.carrega_pipeline(model_path)
     # Realizando a predição
@@ -99,17 +112,23 @@ def predict(form: PacienteSchema):
     
     paciente = Paciente(
         name=name,
-        preg=preg,
-        plas=plas,
-        pres=pres,
-        skin=skin,
-        test=test,
-        mass=mass,
-        pedi=pedi,
-        age=age,
-        outcome=outcome
+        a1_score = a1_score,
+        a2_score = a2_score,
+        a3_score = a3_score,
+        a4_score = a4_score,
+        a5_score = a5_score,
+        a6_score = a6_score,
+        a7_score = a7_score,
+        a8_score = a8_score,
+        a9_score = a9_score,
+        a10_score = a10_score,
+        gender_cod = gender_cod,
+        jaundice_cod = jaundice_cod,
+        autism_cod = autism_cod,
+        relation_cod = relation_cod,
+        outcome = outcome
     )
-    logger.debug(f"Adicionando produto de nome: '{paciente.name}'")
+    logger.debug(f"Adicionando paciente de nome: '{paciente.name}'")
     
     try:
         # Criando conexão com a base
@@ -131,7 +150,7 @@ def predict(form: PacienteSchema):
     
     # Caso ocorra algum erro na adição
     except Exception as e:
-        error_msg = "Não foi possível salvar novo item :/"
+        error_msg = "Não foi possível salvar novo paciente :/"
         logger.warning(f"Erro ao adicionar paciente '{paciente.name}', {error_msg}")
         return {"message": error_msg}, 400
     
@@ -151,7 +170,7 @@ def get_paciente(query: PacienteBuscaSchema):
     """
     
     paciente_nome = query.name
-    logger.debug(f"Coletando dados sobre produto #{paciente_nome}")
+    logger.debug(f"Coletando dados sobre paciente #{paciente_nome}")
     # criando conexão com a base
     session = Session()
     # fazendo a busca
@@ -160,7 +179,7 @@ def get_paciente(query: PacienteBuscaSchema):
     if not paciente:
         # se o paciente não foi encontrado
         error_msg = f"Paciente {paciente_nome} não encontrado na base :/"
-        logger.warning(f"Erro ao buscar produto '{paciente_nome}', {error_msg}")
+        logger.warning(f"Erro ao buscar paciente '{paciente_nome}', {error_msg}")
         return {"mesage": error_msg}, 404
     else:
         logger.debug(f"Paciente econtrado: '{paciente.name}'")

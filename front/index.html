@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>AI Diabetes System</title>
+    <title>AI TEA System</title>
     <link rel="icon" href="img/home_logo.jpeg" type="image/png">
 </head>
 
@@ -15,10 +15,11 @@
      <!-- Cabeçalho de informações do sistema -->
     <header>
         <div class="title">
-            <h2>Bem-Vindo ao AI Diabetes System</h2>
+            <h2>Bem-Vindo ao AI TEA System</h2>
             <br>
-            <p>Este sistema foi desenvolvido para auxiliar no diagnóstico de diabetes.</p>
+            <p>Este sistema foi desenvolvido para auxiliar no diagnóstico de Transtorno do Espectro Autista.</p>
             <p>Para isso, basta preencher os campos abaixo com os dados do paciente e clicar em "Diagnosticar".</p>
+            <p>NENHUM dos campos pode ser vazio ou não ter alguma opção selecionada.</p>
         </div>
         <!-- <div class="banner">
             <img src="img/home.jpeg">
@@ -26,33 +27,120 @@
     </header>
 
      <!-- Opções para adicionar um novo item -->
-     
+
     <section class="newItem">
         <input type="text" id="newInput" placeholder="Nome">
-        <input type="text" id="newPreg" placeholder="Pregancies">
-        <input type="text" id="newPlas" placeholder="Glucose">
-        <input type="text" id="newPres" placeholder="Blood Pressure">
-        <input type="text" id="newSkin" placeholder="Skin Thickness">
-        <input type="text" id="newTest" placeholder="Insulin">
-        <input type="text" id="newMass" placeholder="BMI">
-        <input type="text" id="newPedi" placeholder="Diabetes Pedigree Function">
-        <input type="text" id="newAge" placeholder="Age">
+
+        <select id="newA1_score" required>
+            <option value="" disabled selected hidden>A1 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>  
+        </select>
+
+        <select id="newA2_score">
+            <option value="">A2 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA3_score">
+            <option value="">A3 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA4_score">
+            <option value="">A4 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA5_score">
+            <option value="">A5 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA6_score">
+            <option value="">A6 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA7_score">
+            <option value="">A7 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA8_score">
+            <option value="">A8 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA9_score">
+            <option value="">A9 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newA10_score">
+            <option value="">A10 Score</option>
+            <option value="0">0 - 32</option>
+            <option value="1">33 - 50</option>
+        </select>
+
+        <select id="newGender_cod">
+            <option value="">Gênero</option>
+            <option value="0">Masculino</option>
+            <option value="1">Feminino</option>
+        </select>
+
+        <select id="newJaundice_cod">
+            <option value="">Já teve Icterícia?</option>
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+
+        <select id="newAutism_cod">
+            <option value="">Pais diagnosticados com autismo?</option>
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+
+        <select id="newRelation_cod">
+            <option value="">Quem preencheu formulário?</option>
+            <option value="0">Próprio</option>
+            <option value="1">Pais</option>
+            <option value="2">Parentes</option>
+            <option value="3">Assistente Terapêutico</option>
+            <option value="4">Outros</option>
+        </select>
+
         <span onclick="newItem()" class="addBtn">Diagnosticar</span>
     </section>
+
 
     <!-- Tabela com items existentes -->
     <section class="items">
         <table id="myTable">
             <tr>
                 <th>Nome</th>
-                <th>Pregancies</th>
-                <th>Glucose</th>
-                <th>Blood Pressure</th>
-                <th>Skin Thickness</th>
-                <th>Insulin</th>
-                <th>BMI</th>
-                <th>Diabetes Pedigree Function</th>
-                <th>Age</th>
+                <th>A1 Score</th>
+                <th>A2 Score</th>
+                <th>A3 Score</th>
+                <th>A4 Score</th>
+                <th>A5 Score</th>
+                <th>A6 Score</th>
+                <th>A7 Score</th>
+                <th>A8 Score</th>
+                <th>A9 Score</th>
+                <th>A10 Score</th>
+                <th>Gender</th>
+                <th>Jaundice</th>
+                <th>Autism</th>
+                <th>Relation</th>
                 <th>Diagnostic</th>
                 <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15" height="15"></th>
                 <!-- <th><img src="img/edit.png" width="15" height="15"></th> -->
