@@ -1,4 +1,4 @@
-<img src="images/banner-autismo.png" alt="Logo Sistema de Apoio ao Autista" width="300" height="300">
+<img src="img/banner-autismo.png" alt="Logo Sistema de Apoio ao Autista" width="300" height="300">
 
 # AI TEA System
 
